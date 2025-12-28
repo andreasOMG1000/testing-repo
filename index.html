@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin UI - Andreas</title>
+  <title>Command UI</title>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -87,7 +87,23 @@
 
       document.getElementById(tab + '-panel').classList.remove('hidden');
       document.getElementById('tab-' + tab).classList.add('bg-neutral-600');
+
+      clearActiveButtons();
     }
+
+    function clearActiveButtons() {
+      document.querySelectorAll('.ui-btn').forEach(btn => {
+        btn.classList.remove('active-btn');
+      });
+    }
+
+    // Add click behavior to ALL non-tab buttons
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('ui-btn')) {
+        clearActiveButtons();
+        e.target.classList.add('active-btn');
+      }
+    });
   </script>
 
   <!-- Button Styling -->
@@ -98,6 +114,15 @@
       background-color: rgb(64 64 64);
       border-radius: 0.375rem;
       text-align: center;
+      transition: background-color 0.15s ease;
+    }
+
+    .ui-btn:hover {
+      background-color: rgb(75 75 75);
+    }
+
+    .active-btn {
+      background-color: rgb(38 38 38);
     }
   </style>
 

@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Command UI</title>
+  <title>Admin UI - Andreas</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-neutral-900 flex items-center justify-center min-h-screen text-white">
 
   <!-- Main Panel -->
-  <div class="w-full max-w-5xl bg-neutral-800 rounded-lg shadow-lg p-4">
+  <div class="w-full max-w-xl bg-neutral-800 rounded-lg shadow-lg p-4">
 
     <!-- Tabs -->
     <div class="flex bg-neutral-700 rounded-md overflow-hidden mb-4">
@@ -29,48 +29,52 @@
     </div>
 
     <!-- Search -->
-    <input
-      type="text"
-      placeholder="Search!"
-      class="w-48 mb-4 px-3 py-2 bg-neutral-700 rounded outline-none"
-    />
+    <div class="flex justify-center mb-4">
+      <input
+        type="text"
+        placeholder="Search!"
+        class="w-56 px-3 py-2 bg-neutral-700 rounded outline-none"
+      />
+    </div>
 
-    <!-- Content Area -->
-    <div class="grid grid-cols-3 gap-4">
+    <!-- Button Area -->
+    <div class="flex justify-center">
+      <div class="w-full max-w-xs">
 
-      <!-- LEFT PANEL -->
-      <div id="players-panel" class="space-y-2">
-        <button class="btn">All</button>
-        <button class="btn">None</button>
-        <button class="btn">Others</button>
-        <button class="btn">Random</button>
-        <button class="btn">Spectators</button>
+        <!-- Players -->
+        <div id="players-panel" class="space-y-2">
+          <button class="ui-btn">All</button>
+          <button class="ui-btn">None</button>
+          <button class="ui-btn">Others</button>
+          <button class="ui-btn">Random</button>
+          <button class="ui-btn">Spectators</button>
+        </div>
+
+        <!-- Commands -->
+        <div id="commands-panel" class="space-y-2 hidden">
+          <button class="ui-btn">Ban</button>
+          <button class="ui-btn">Unban</button>
+          <button class="ui-btn">Bring</button>
+          <button class="ui-btn">Chain</button>
+          <button class="ui-btn">Fly</button>
+          <button class="ui-btn">Freeze</button>
+          <button class="ui-btn">Lifelink</button>
+          <button class="ui-btn">Lowgrav</button>
+        </div>
+
+        <!-- Tools -->
+        <div id="tools-panel" class="space-y-2 hidden">
+          <button class="ui-btn">Main</button>
+          <button class="ui-btn">Utility</button>
+          <button class="ui-btn">Fun</button>
+          <button class="ui-btn">Damage</button>
+        </div>
+
       </div>
-
-      <!-- CENTER PANEL -->
-      <div id="commands-panel" class="space-y-2 hidden">
-        <button class="btn">Ban</button>
-        <button class="btn">Unban</button>
-        <button class="btn">Bring</button>
-        <button class="btn">Chain</button>
-        <button class="btn">Fly</button>
-        <button class="btn">Freeze</button>
-        <button class="btn">Lifelink</button>
-        <button class="btn">Lowgrav</button>
-      </div>
-
-      <!-- RIGHT PANEL -->
-      <div id="tools-panel" class="space-y-2 hidden">
-        <button class="btn">Main</button>
-        <button class="btn">Utility</button>
-        <button class="btn">Fun</button>
-        <button class="btn">Damage</button>
-      </div>
-
     </div>
   </div>
 
-  <!-- JavaScript -->
+  <!-- JS -->
   <script>
     const panels = {
       players: "players-panel",
@@ -79,27 +83,24 @@
     };
 
     function showTab(tab) {
-      // hide all panels
-      Object.values(panels).forEach(id => {
-        document.getElementById(id).classList.add("hidden");
-      });
+      Object.values(panels).forEach(id =>
+        document.getElementById(id).classList.add("hidden")
+      );
 
-      // reset tab styles
       document.querySelectorAll(".tab-btn").forEach(btn => {
         btn.classList.remove("bg-neutral-600");
         btn.classList.add("bg-neutral-700");
       });
 
-      // show selected
       document.getElementById(panels[tab]).classList.remove("hidden");
       document.getElementById("tab-" + tab).classList.add("bg-neutral-600");
     }
   </script>
 
-  <!-- Button style -->
+  <!-- Button styling -->
   <style>
-    .btn {
-      @apply w-full py-2 bg-neutral-700 rounded shadow-inner text-center;
+    .ui-btn {
+      @apply w-full py-2 bg-neutral-700 rounded text-center shadow;
     }
   </style>
 

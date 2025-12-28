@@ -1,26 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin GUI</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-<body class="bg-gray-900 text-white">
-    <div class="flex justify-center items-start h-screen">
-        <div class="bg-gray-800 rounded-md shadow-lg p-4 m-4 w-3/4">
-            <div class="flex justify-around">
-                <button class="px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none">Players</button>
-                <button class="px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none">Commands</button>
-                <button class="px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none">Tools</button>
-            </div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Command UI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-            <div class="mt-4 grid grid-cols-3 gap-4">
-                <div>
-                    <input type="text" placeholder="Search!" class="bg-gray-700 text-white rounded-md p-2 w-full focus:outline-none">
-                    <button class="block w-full mt-2 px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 focus:outline-none">All</button>
-                    <button class="block w-full mt-2 px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 focus:outline-none">None</button>
-                    <button class="block w-full mt-2 px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 focus:outline-none">Others</button>
-                    <button class="block w-full mt-2 px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 focus:outline-none">Random</button>
-                    <button class="block w-full mt-2 px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 focus:outline-none">Spectators</button>
+<body class="bg-neutral-900 flex items-center justify-center min-h-screen text-white">
+
+  <!-- Main Panel -->
+  <div class="w-full max-w-5xl bg-neutral-800 rounded-lg shadow-lg p-4">
+
+    <!-- Tabs -->
+    <div class="flex bg-neutral-700 rounded-md overflow-hidden mb-4">
+      <button onclick="showTab('players')" id="tab-players"
+        class="tab-btn flex-1 py-2 bg-neutral-600 font-semibold">
+        Players
+      </button>
+      <button onclick="showTab('commands')" id="tab-commands"
+        class="tab-btn flex-1 py-2 bg-neutral-700">
+        Commands
+      </button>
+      <button onclick="showTab('tools')" id="tab-tools"
+        class="tab-btn flex-1 py-2 bg-neutral-700">
+        Tools
+      </button>
+    </div>
+
+    <!-- Search -->
+    <input
+      type="text"
+      placeholder="Search!"
+      class="w-48 mb-4 px-3 py-2 bg-neutral-700 rounded outline-none"
+    />
+
+    <!-- Content Area -->
+    <div class="grid grid-cols-3 gap-4">
+
+      <!-- LEFT PANEL -->
+      <div id="players-panel" class="space-y-2">
+        <button class="btn">All</button>
+        <button class="btn">None</button>
+        <button class="btn">Others</button>
+        <button class="btn">Random</button>
+        <button class="btn">Spectators</button>
+      </div>
+
+      <!-- CENTER PANEL -->
+      <div id="commands-panel" class="space-y-2 hidden">
+        <button class="btn">Ban</button>
+        <button class="btn">Unban</button>
+        <button class="btn">Bring</button>
+        <button class="btn">Chain</button>
+        <button class="btn">Fly</button>
+        <button class="btn">Freeze</button>
+        <button class="btn">Lifelink</button>
+        <button class="btn">Lowgrav</button>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div id="tools-panel" class="space-y-2 hidden">
+        <button class="btn">Main</button>
+        <button class="btn">Utility</button>
+        <button class="btn">Fun</button>
+        <button class="btn">Damage</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const panels = {
+      players: "players-panel",
+      commands: "commands-panel",
+      tools: "tools-panel"
+    };
+
+    function showTab(tab) {
+      // hide all panels
+      Object.values(panels).forEach(id => {
+        document.getElementById(id).classList.add("hidden");
+      });
+
+      // reset tab styles
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.classList.remove("bg-neutral-600");
+        btn.classList.add("bg-neutral-700");
+      });
+
+      // show selected
+      document.getElementById(panels[tab]).classList.remove("hidden");
+      document.getElementById("tab-" + tab).classList.add("bg-neutral-600");
+    }
+  </script>
+
+  <!-- Button style -->
+  <style>
+    .btn {
+      @apply w-full py-2 bg-neutral-700 rounded shadow-inner text-center;
+    }
+  </style>
+
+</body>
+</html>
